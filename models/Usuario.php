@@ -149,14 +149,12 @@ class Usuario extends Conectar
 
                             header("Location:" . Conectar::ruta() . "view/home/");
                         } else {
-                            echo $sucursal . ' ' . $correo . ' ' . $pass;
-                            // header("Location:" . Conectar::ruta() . "view/404/");
+                             header("Location:" . Conectar::ruta() . "view/404/");
                             exit();
                         }
                     }
                 } else {
-                    echo $sucursal . ' ' . $correo . ' ' . $pass;
-                    // header("Location:" . Conectar::ruta() . "view/404/");
+                    header("Location:" . Conectar::ruta() . "view/404/");
                     exit();
                 }
             }

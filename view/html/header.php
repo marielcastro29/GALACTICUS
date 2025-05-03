@@ -47,7 +47,7 @@
                             <?php
                             if ($_SESSION["USU_IMG"] == "") {
                             ?>
-                                <img class="rounded-circle header-profile-user" src="../../assets/usuario/no_imagen.png" alt="Header Avatar">
+                                <img class="rounded-circle header-profile-user" src="../../assets/usuario/no_imagen.jpg" alt="Header Avatar">
                             <?php
                             } else {
                             ?>

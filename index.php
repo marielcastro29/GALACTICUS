@@ -43,7 +43,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card overflow-hidden shadow">
-                            <div  class="row g-0">
+                            <div class="row g-0">
                                 <div class="col-lg-6 ">
                                     <div class="p-lg-5 p-5 auth-one-bg h-100">
                                         <div class="bg-overlay"></div>
@@ -83,13 +83,16 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <div class="float-end">
-                                                    </div>
+                                                    <div class="float-end"></div>
                                                     <label class="form-label" for="usu_pass">Contraseña</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
                                                         <input type="password" class="form-control pe-5" placeholder="Ingrese Contraseña" name="usu_pass" id="usu_pass">
+                                                        <button type="button" class="btn position-absolute end-0 top-50 translate-middle-y bg-transparent border-0 p-2 toggle-eye" data-target="usu_pass">
+                                                            <i class="ri-eye-off-line"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
+
 
 
 
