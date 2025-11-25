@@ -3,7 +3,7 @@
         /* TODO: Listar Registros */
         public function get_pago(){
             $conectar=parent::Conexion();
-            $sql="SP_L_PAGO_01";
+            $sql="SP_L_PAGO";//SP_L_PAGOS
             $query=$conectar->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);

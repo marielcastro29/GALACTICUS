@@ -40,8 +40,8 @@
                     <div class="row gy-2">
                         <div class="col-md-12">
                             <div>
-                                <label for="valueInput" class="form-label">Correo</label>
-                                <input type="text" class="form-control" id="prov_correo" name="prov_correo" required/>
+                                <label for="valueInput" class="form-label">Direccion</label>
+                                <input type="text" class="form-control" id="prov_direcc" name="prov_direcc" required/>
                             </div>
                         </div>
                     </div>
@@ -49,8 +49,8 @@
                     <div class="row gy-2">
                         <div class="col-md-12">
                             <div>
-                                <label for="valueInput" class="form-label">Direccion</label>
-                                <input type="text" class="form-control" id="prov_direcc" name="prov_direcc" required/>
+                                <label for="valueInput" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="prov_correo" name="prov_correo" required/>
                             </div>
                         </div>
                     </div>

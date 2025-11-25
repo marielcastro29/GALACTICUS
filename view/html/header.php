@@ -60,8 +60,8 @@
                             ?>
 
                             <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"><?php echo $_SESSION["USU_NOM"] ?> <?php echo $_SESSION["USU_APE"] ?></span>
-                                <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Administrador</span>
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"><?php echo $_SESSION["USU_NOM"] ?></span>
+                                <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"><?php echo $_SESSION["ROL_NOM"] ?></span>
                             </span>
                         </span>
                     </button>
@@ -72,10 +72,11 @@
 
                     <div class="dropdown-menu dropdown-menu-end">
 
-                        <h6 class="dropdown-header">Bienvenido <?php echo $_SESSION["USU_NOM"] ?>!</h6>
-                        <a class="dropdown-item" href="../Perfil/"><i
-                                class=" ri-user-3-line text-muted fs-16 align-middle me-1"></i> <span
-                                class="align-middle">Perfil</span></a>
+                        <h6 class="dropdown-header">Bienvenid@ <?php echo $_SESSION["PRIMER_NOMBRE"] . ' ' . $_SESSION["PRIMER_APELLIDO"] ?>!</h6>
+                        <a class="dropdown-item" href="../Perfil/index.php?id=<?php echo $_SESSION["USU_ID"]; ?>">
+                            <i class="ri-user-3-line text-muted fs-16 align-middle me-1"></i>
+                            <span class="align-middle">Perfil</span>
+                        </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="../Contraseña/"><i
                                 class="ri-lock-password-line text-muted fs-16 align-middle me-1"></i> <span

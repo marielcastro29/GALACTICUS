@@ -7,7 +7,7 @@ class Proveedor extends Conectar
     public function get_proveedor_x_suc_id($suc_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_L_PROVEEDOR_01 ?";
+        $sql = "SP_L_PROVEEDOR_01 ?";//SP_L_PROVEEDOR
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $suc_id);
         $query->execute();
@@ -20,7 +20,7 @@ class Proveedor extends Conectar
     public function delete_proveedor($prov_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_D_PROVEEDOR_01 ?";
+        $sql = "SP_D_PROVEEDOR_01 ?";//SP_D_PROVEEDOR
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $prov_id);
         $query->execute();
@@ -30,7 +30,7 @@ class Proveedor extends Conectar
     public function insert_proveedor($suc_id, $prov_nom, $prov_ruc, $prov_telf, $prov_direcc, $prov_correo)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_I_PROVEEDOR_01 ?,?,?,?,?,?";
+        $sql = "SP_I_PROVEEDOR_01 ?,?,?,?,?,?";//SP_I_PROVEEDOR
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $suc_id);
         $query->bindValue(2, $prov_nom);
@@ -46,7 +46,7 @@ class Proveedor extends Conectar
     public function update_proveedor($prov_id, $suc_id, $prov_nom, $prov_ruc, $prov_telf, $prov_direcc, $prov_correo)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_U_PROVEEDOR_01 ?,?,?,?,?,?,?";
+        $sql = "SP_U_PROVEEDOR_01 ?,?,?,?,?,?,?";//SP_U_PROVEEDOR
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $prov_id);
         $query->bindValue(2, $suc_id);
@@ -62,7 +62,7 @@ class Proveedor extends Conectar
     public function get_proveedor_x_prov_id($prov_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_L_PROVEEDOR_02 ?";
+        $sql = "SP_L_PROVEEDOR_02 ?";//SP_L_PROVEEDOR_BY_ID
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $prov_id);
         $query->execute();

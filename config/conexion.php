@@ -7,7 +7,7 @@
         protected function Conexion(){
             try{
                 /* TODO: Cadena de Conexion */
-                $conectar = $this->dbh=new PDO("sqlsrv:Server=localhost;Database=GalacticusDB","sa","1234");
+                $conectar = $this->dbh=new PDO("sqlsrv:Server=localhost;Database=GALACTICUSBD","sa","1234");
                 return $conectar;
             }catch (Exception $e){
                 /* TODO: En caso de error mostrar mensaje */

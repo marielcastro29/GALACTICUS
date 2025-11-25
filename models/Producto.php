@@ -5,7 +5,7 @@ class Producto extends Conectar
     public function get_producto_x_suc_id($suc_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_L_PRODUCTO_01 ?";
+        $sql = "SP_L_PRODUCTO_01 ?";//SP_L_PRODUCTO_BY_SUCURSAL_ID
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $suc_id);
         $query->execute();
@@ -15,12 +15,12 @@ class Producto extends Conectar
     public function get_cantidad_producto($suc_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_CANTIDAD_PRODUCTO_X_SUC ?";
+        $sql = "SP_CANTIDAD_PRODUCTO_BY_SUCURSAL_ID ?";//SP_CANTIDAD_PRODUCTO_BY_SUCURSAL_ID
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $suc_id);
         $query->execute();
         $resultado = $query->fetch(PDO::FETCH_ASSOC);
-        $totalproducto = $resultado['Cantidad Producto'];
+        $totalproducto = $resultado['CANTIDAD PRODUCTO'];
         return $totalproducto;
     }
 
@@ -28,7 +28,7 @@ class Producto extends Conectar
     public function get_producto_x_prod_id($prod_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_L_PRODUCTO_02 ?";
+        $sql = "SP_L_PRODUCTO_02 ?";//SP_L_PRODUCTO_BY_ID
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $prod_id);
         $query->execute();
@@ -39,7 +39,7 @@ class Producto extends Conectar
     public function get_producto_x_cat_id($cat_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_L_PRODUCTO_03 ?";
+        $sql = "SP_L_PRODUCTO_03 ?";//SP_L_PRODUCTO_BY_CATEGORIA_ID
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $cat_id);
         $query->execute();
@@ -50,7 +50,7 @@ class Producto extends Conectar
     public function delete_producto($prod_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_D_PRODUCTO_01 ?";
+        $sql = "SP_D_PRODUCTO_01 ?";//SP_D_PRODUCTO
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $prod_id);
         $query->execute();
@@ -68,7 +68,7 @@ class Producto extends Conectar
         $prod_img
     ) {
         $conectar = parent::Conexion();
-        $sql = "SP_I_PRODUCTO_01 ?,?,?,?,?,?,?,?";
+        $sql = "SP_I_PRODUCTO_01 ?,?,?,?,?,?,?,?";//SP_I_PRODUCTO
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $suc_id);
         $query->bindValue(2, $cat_id);
@@ -96,7 +96,7 @@ class Producto extends Conectar
     ) {
         $conectar = parent::Conexion();
 
-        $sql = "SP_U_PRODUCTO_01 ?,?,?,?,?,?,?,?,?";
+        $sql = "SP_U_PRODUCTO_01 ?,?,?,?,?,?,?,?,?";//SP_U_PRODUCTO
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $prod_id);
         $query->bindValue(2, $suc_id);
@@ -127,7 +127,7 @@ class Producto extends Conectar
     public function get_producto_consumo($prod_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_L_PRODUCTO_05 ?";
+        $sql = "SP_L_PRODUCTO_05 ?";//SP_L_PRODUCTO_CONSUMO
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $prod_id);
         $query->execute();

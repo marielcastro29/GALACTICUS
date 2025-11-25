@@ -13,11 +13,11 @@
             $data=Array();
             foreach($datos as $row){
                 $sub_array = array();
-                $sub_array[] = $row["MEN_NOM"];
-                if ($row["MEND_PERMI"]=="SI"){
-                    $sub_array[] = '<button type="button"  onClick="deshabilitar('.$row["MEND_ID"].')" id="'.$row["MEND_ID"].'" class="btn btn-primary btn-label btn-sm"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>'.$row["MEND_PERMI"].'</button>';
+                $sub_array[] = $row["NOMBRE"];
+                if ($row["PERMITIDO"]==1){
+                    $sub_array[] = '<button type="button"  onClick="deshabilitar('.$row["ID"].')" id="'.$row["ID"].'" class="btn btn-primary btn-label btn-sm"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>SI</button>';
                 }else{
-                    $sub_array[] = '<button type="button" onClick="habilitar('.$row["MEND_ID"].')" id="'.$row["MEND_ID"].'" class="btn btn-danger btn-label btn-sm"><i class="ri-close-circle-line label-icon align-middle fs-16 me-2"></i> '.$row["MEND_PERMI"].'</button>';
+                    $sub_array[] = '<button type="button" onClick="habilitar('.$row["ID"].')" id="'.$row["ID"].'" class="btn btn-danger btn-label btn-sm"><i class="ri-close-circle-line label-icon align-middle fs-16 me-2"></i>NO</button>';
                 }
                 $data[] = $sub_array;
             }
@@ -37,7 +37,6 @@
         case "deshabilitar":
             $menu->update_menu_deshabilitar($_POST["mend_id"]);
             break;
-
         /* TODO: Registrar Nuevo rol */
         case "insert":
             $menu = new Menu();

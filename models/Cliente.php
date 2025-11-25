@@ -5,7 +5,7 @@ class Cliente extends Conectar
     public function get_cliente_x_suc_id($suc_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_L_CLIENTE_01 ?";
+        $sql = "SP_L_CLIENTE_01 ?";//SP_L_CLIENTE_BY_SUCURSAL_ID
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $suc_id);
         $query->execute();
@@ -16,7 +16,7 @@ class Cliente extends Conectar
     public function get_cliente_x_cli_id($cli_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_L_CLIENTE_02 ?";
+        $sql = "SP_L_CLIENTE_02 ?";//SP_L_CLIENTE_BY_ID
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $cli_id);
         $query->execute();
@@ -27,7 +27,7 @@ class Cliente extends Conectar
     public function delete_cliente($cli_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_D_CLIENTE_01 ?";
+        $sql = "SP_D_CLIENTE_01 ?";//SP_D_CLIENTE
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $cli_id);
         $query->execute();
@@ -37,7 +37,7 @@ class Cliente extends Conectar
     public function insert_cliente($suc_id, $cli_nom, $cli_ruc, $cli_telf, $cli_direcc, $cli_correo)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_I_CLIENTE_01 ?,?,?,?,?,?";
+        $sql = "SP_I_CLIENTE_01 ?,?,?,?,?,?";//SP_I_CLIENTE
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $suc_id);
         $query->bindValue(2, $cli_nom);
@@ -52,7 +52,7 @@ class Cliente extends Conectar
     public function update_cliente($cli_id, $cli_nom, $cli_ruc, $cli_telf, $cli_direcc, $cli_correo)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_U_CLIENTE_01 ?,?,?,?,?,?";
+        $sql = "SP_U_CLIENTE_01 ?,?,?,?,?,?";//SP_U_CLIENTE
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $cli_id);
         $query->bindValue(2, $cli_nom);
@@ -67,12 +67,12 @@ class Cliente extends Conectar
     public function get_cantidad_cliente($suc_id)
     {
         $conectar = parent::Conexion();
-        $sql = "SP_CANTIDAD_CLIENTE_X_SUC ?";
+        $sql = "SP_CANTIDAD_CLIENTE_BY_SUCURSAL_ID ?";//
         $query = $conectar->prepare($sql);
         $query->bindValue(1, $suc_id);
         $query->execute();
         $resultado = $query->fetch(PDO::FETCH_ASSOC);
-        $totalcliente = $resultado['Cantidad Cliente'];
+        $totalcliente = $resultado['CANTIDAD CLIENTE'];
         return $totalcliente;
     }
 }

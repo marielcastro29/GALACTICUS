@@ -2,7 +2,7 @@
     require_once("../../config/conexion.php");
     require_once("../../models/Rol.php");
     $rol = new Rol();
-    $datos = $rol->validar_acceso_rol($_SESSION["USU_ID"],"mntsucursal");
+    $datos = $rol->validar_acceso_rol($_SESSION["USU_ID"],"sucursal");
     if(isset($_SESSION["USU_ID"])){
         if(is_array($datos) and count($datos)>0){
 ?>
@@ -50,6 +50,9 @@
                                         <thead>
                                             <tr>
                                                 <th>Nombre</th>
+                                                <th>Correo</th>
+                                                <th>Teléfono</th>
+                                                <th>Dirección</th>
                                                 <th>Fecha de creación</th>
                                                 <th></th>
                                                 <th></th>

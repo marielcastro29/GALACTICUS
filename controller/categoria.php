@@ -21,10 +21,10 @@
             $data=Array();
             foreach($datos as $row){
                 $sub_array = array();
-                $sub_array[] = $row["CAT_NOM"];
-                $sub_array[] = date("d-m-Y", strtotime($row["FECH_CREA"]))." ".date("h:i:s", strtotime($row["FECH_CREA"]));
-                $sub_array[] = '<button type="button" onClick="editar('.$row["CAT_ID"].')" id="'.$row["CAT_ID"].'" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-edit-2-line"></i></button>';
-                $sub_array[] = '<button type="button" onClick="eliminar('.$row["CAT_ID"].')" id="'.$row["CAT_ID"].'" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-delete-bin-5-line"></i></button>';
+                $sub_array[] = $row["NOMBRE"];
+                $sub_array[] = $row["FECHA_CREACION"];
+                $sub_array[] = '<button type="button" onClick="editar('.$row["ID"].')" id="'.$row["ID"].'" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-edit-2-line"></i></button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row["ID"].')" id="'.$row["ID"].'" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-delete-bin-5-line"></i></button>';
                 $data[] = $sub_array;
             }
 
@@ -41,9 +41,9 @@
             $datos=$categoria->get_categoria_x_cat_id($_POST["cat_id"]);
             if (is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row){
-                    $output["CAT_ID"] = $row["CAT_ID"];
-                    $output["SUC_ID"] = $row["SUC_ID"];
-                    $output["CAT_NOM"] = $row["CAT_NOM"];
+                    $output["CAT_ID"] = $row["ID"];
+                    $output["SUC_ID"] = $row["SUCURSAL_ID"];
+                    $output["CAT_NOM"] = $row["NOMBRE"];
                 }
                 echo json_encode($output);
             }

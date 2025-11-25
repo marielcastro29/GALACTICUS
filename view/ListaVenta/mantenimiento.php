@@ -14,8 +14,9 @@
                             <th></th>
                             <th>Categoria</th>
                             <th>Producto</th>
-                            <th>Precio de venta</th>
-                            <th>Cantidad</th>
+                            <th>Und</th>
+                            <th>P.Venta</th>
+                            <th>Cant</th>
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -32,7 +33,7 @@
                             <td class="text-end" id="txtsubtotal">0</td>
                         </tr>
                         <tr>
-                            <td>IVA (15%)</td>
+                            <td>IGV (18%)</td>
                             <td class="text-end" id="txtigv">0</td>
                         </tr>
                         <tr class="border-top border-top-dashed fs-15">

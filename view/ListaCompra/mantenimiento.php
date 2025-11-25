@@ -7,15 +7,16 @@
             </div>
 
             <div class="modal-body">
-                <!-- TODO:Listado detalle de Venta -->
+                <!-- TODO: Detalle de Compra -->
                 <table id="detalle_data" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
                     <thead>
                         <tr>
                             <th></th>
                             <th>Categoria</th>
                             <th>Producto</th>
-                            <th>Precio de venta</th>
-                            <th>Cantidad</th>
+                            <th>Und</th>
+                            <th>P.Compra</th>
+                            <th>Cant</th>
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -24,7 +25,7 @@
                     </tbody>
                 </table>
 
-                <!-- TODO:Calculo de Venta -->
+                <!-- TODO: Calculo de Compra -->
                 <table class="table table-borderless table-nowrap align-middle mb-0 ms-auto" style="width:250px">
                     <tbody>
                         <tr>
@@ -32,7 +33,7 @@
                             <td class="text-end" id="txtsubtotal">0</td>
                         </tr>
                         <tr>
-                            <td>IVA (15%)</td>
+                            <td>IGV (18%)</td>
                             <td class="text-end" id="txtigv">0</td>
                         </tr>
                         <tr class="border-top border-top-dashed fs-15">

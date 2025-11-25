@@ -3,6 +3,7 @@ require_once("../../config/conexion.php");
 require_once("../../models/Rol.php");
 $rol = new Rol();
 $datos = $rol->validar_acceso_rol($_SESSION["USU_ID"], "mntperfil");
+
 if (isset($_SESSION["USU_ID"])) {
     if (is_array($datos) and count($datos) > 0) {
 ?>
@@ -49,7 +50,7 @@ if (isset($_SESSION["USU_ID"])) {
                                                 <div class="live-preview">
                                                     <div class="row gy-4">
                                                         <!-- Contraseña anterior -->
-                                                        <div class="col-xxl-3 col-md-6">
+                                                        <div class="col-md-5">
                                                             <div>
                                                                 <label for="txtpass" class="form-label">Contraseña anterior</label>
                                                                 <div class="position-relative">
@@ -62,7 +63,7 @@ if (isset($_SESSION["USU_ID"])) {
                                                         </div>
 
                                                         <!-- Nueva contraseña -->
-                                                        <div class="col-xxl-3 col-md-6">
+                                                        <div class="col-md-5">
                                                             <div>
                                                                 <label for="txtpassconfirm" class="form-label">Nueva contraseña</label>
                                                                 <div class="position-relative">
@@ -74,10 +75,12 @@ if (isset($_SESSION["USU_ID"])) {
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xxl-3 col-md-6">
-                                                            <div>
-                                                                <label for="labelInput" class="form-label">&nbsp;</label>
-                                                                <button type="button" id="btnguardar" class="btn-color btn btn-soft-primary waves-effect waves-light">Actualizar contraseña</button>
+                                                        <!-- Botón -->
+                                                        <div class="col-md-2 d-flex align-items-end">
+                                                            <div class="w-100">
+                                                                <button type="button" id="btnguardar" class="btn-color btn btn-soft-primary waves-effect waves-light w-100">
+                                                                    Actualizar contraseña
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>

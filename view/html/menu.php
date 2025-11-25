@@ -26,13 +26,13 @@ $datos = $menu->get_menu_x_rol_id($_SESSION["ROL_ID"]);
 
                 <?php
                 foreach ($datos as $row) {
-                    if ($row["MEN_GRUPO"] == "Inicio" && $row["MEND_PERMI"] == "SI") {
+                    if ($row["GRUPO"] == "Inicio" && $row["PERMITIDO"] == 1) {
 
                 ?>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="<?php echo $row["MEN_RUTA"]; ?>">
-                                <i class="<?php echo $row["MEN_ICON"]; ?>"></i>
-                                <span data-key="t-widgets"><?php echo $row["MEN_NOM"]; ?></span>
+                            <a class="nav-link menu-link" href="<?php echo $row["RUTA"]; ?>">
+                                <i class="<?php echo $row["ICONO"]; ?>"></i>
+                                <span data-key="t-widgets"><?php echo $row["NOMBRE"]; ?></span>
                             </a>
                         </li>
                 <?php
@@ -44,11 +44,11 @@ $datos = $menu->get_menu_x_rol_id($_SESSION["ROL_ID"]);
 
                 <?php
                 foreach ($datos as $row) {
-                    if ($row["MEN_GRUPO"] == "Mantenimiento" && $row["MEND_PERMI"] == "SI") {
+                    if ($row["GRUPO"] == "Mantenimiento" && $row["PERMITIDO"] == 1) {
                 ?>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="<?php echo $row["MEN_RUTA"]; ?>">
-                                <i class="<?php echo $row["MEN_ICON"]; ?>"></i> <span data-key="t-widgets"><?php echo $row["MEN_NOM"]; ?></span>
+                            <a class="nav-link menu-link" href="<?php echo $row["RUTA"]; ?>">
+                                <i class="<?php echo $row["ICONO"]; ?>"></i> <span data-key="t-widgets"><?php echo $row["NOMBRE"]; ?></span>
                             </a>
                         </li>
                 <?php
@@ -60,11 +60,11 @@ $datos = $menu->get_menu_x_rol_id($_SESSION["ROL_ID"]);
 
                 <?php
                 foreach ($datos as $row) {
-                    if ($row["MEN_GRUPO"] == "Compra" && $row["MEND_PERMI"] == "SI") {
+                    if ($row["GRUPO"] == "Compra" && $row["PERMITIDO"] == 1) {
                 ?>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="<?php echo $row["MEN_RUTA"]; ?>">
-                            <i class="<?php  echo $row["MEN_ICON"]; ?>"></i><span data-key="t-widgets"><?php echo $row["MEN_NOM"]; ?></span>
+                            <a class="nav-link menu-link" href="<?php echo $row["RUTA"]; ?>">
+                            <i class="<?php  echo $row["ICONO"]; ?>"></i><span data-key="t-widgets"><?php echo $row["NOMBRE"]; ?></span>
                             </a>
                         </li>
                 <?php
@@ -77,11 +77,11 @@ $datos = $menu->get_menu_x_rol_id($_SESSION["ROL_ID"]);
 
                 <?php
                 foreach ($datos as $row) {
-                    if ($row["MEN_GRUPO"] == "Venta" && $row["MEND_PERMI"] == "SI") {
+                    if ($row["GRUPO"] == "Venta" && $row["PERMITIDO"] == 1) {
                 ?>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="<?php echo $row["MEN_RUTA"]; ?>">
-                            <i class="<?php  echo $row["MEN_ICON"]; ?>"></i><span data-key="t-widgets"><?php echo $row["MEN_NOM"]; ?></span>
+                            <a class="nav-link menu-link" href="<?php echo $row["RUTA"]; ?>">
+                            <i class="<?php  echo $row["ICONO"]; ?>"></i><span data-key="t-widgets"><?php echo $row["NOMBRE"]; ?></span>
                             </a>
                         </li>
                 <?php

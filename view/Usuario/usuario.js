@@ -1,152 +1,167 @@
+// Función para limpiar caracteres especiales y evitar errores de HTML
+function escapeHtml(str) {
+  if (str === null || str === undefined) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
-var suc_id = $('#SUC_IDx').val();
+function buildCard(row) {
+  // 1. Mapeo de Datos del SP a variables
+  var id = row.USU_ID;
 
-function init(){
-    $("#mantenimiento_form").on("submit",function(e){
-        guardaryeditar(e);
+  // Nombre completo: Concatenamos Primer Nombre + Primer Apellido
+  var nombre = row.PER_PRIMER_NOMBRE || "";
+  var apellido = row.PER_PRIMER_APELLIDO || "";
+  var displayName = (nombre + " " + apellido).trim();
+  if (!displayName) displayName = row.USU_USERNAME; // Fallback
+
+  var rol = row.ROL_NOMBRE || "Sin Rol";
+  var salario = row.EMP_SALARIO
+    ? parseFloat(row.EMP_SALARIO).toFixed(2)
+    : "0.00";
+  var correo = row.PER_CORREO || "Sin correo";
+
+  // Manejo de Imagen
+  var imagenNombre = row.USU_IMAGEN;
+
+  //var imgSrc = '../../assets/usuario/no_imagen.png'; // Imagen por defecto
+  var imgSrc = "../../assets/usuario/no_imagen.jpg"; // Imagen por defecto
+  if (imagenNombre) {
+    imgSrc = "../../assets/usuario/" + escapeHtml(imagenNombre);
+  }
+
+  // 2. Construcción del HTML (Usando TU plantilla exacta)
+  var html = "";
+  html += '<div class="col">'; // Columna de la grilla
+  html += '<div class="card card-body h-100">'; // Card
+
+  // --- Cabecera: Imagen y Nombres ---
+  html += '<div class="d-flex mb-4 align-items-center">';
+  html += '<div class="flex-shrink-0">';
+  html +=
+    '<img src="' + imgSrc + '" alt="" class="avatar-sm rounded-circle" />';
+  html += "</div>";
+  html += '<div class="flex-grow-1 ms-2">';
+  html += '<h5 class="card-title mb-1">' + escapeHtml(displayName) + "</h5>";
+  html += '<p class="text-muted mb-0">' + escapeHtml(rol) + "</p>";
+  html += "</div>";
+  html += "</div>";
+
+  // --- Cuerpo: Salario y Detalle ---
+  html += '<h6 class="mb-1">C$ ' + salario + "</h6>";
+  html += '<p class="card-text text-muted">' + escapeHtml(correo) + "</p>";
+
+  // --- Botones: Editar y Eliminar (Reemplazando "See Details") ---
+  html += '<div class="d-flex gap-2 mt-3">';
+  html +=
+    '<button type="button" onclick="editarUsuario(' +
+    id +
+    ')" class="btn btn-soft-primary btn-sm w-50"><i class="ri-edit-2-line align-bottom me-1"></i> Editar</button>';
+  html +=
+    '<button type="button" onclick="eliminarUsuario(' +
+    id +
+    ')" class="btn btn-soft-danger btn-sm w-50"><i class="ri-delete-bin-line align-bottom me-1"></i> Eliminar</button>';
+  html += "</div>";
+
+  html += "</div>"; // Fin card
+  html += "</div>"; // Fin col
+  return html;
+}
+
+function renderUsuarios(rows) {
+  var $container = $("#usuarios_cards"); // El ID del contenedor en tu HTML
+  $container.empty();
+
+  if (!Array.isArray(rows) || rows.length === 0) {
+    $container.html(
+      '<div class="col-12"><div class="alert alert-warning">No se encontraron usuarios en esta sucursal.</div></div>'
+    );
+    return;
+  }
+
+  var html = "";
+  rows.forEach(function (r) {
+    html += buildCard(r);
+  });
+  $container.html(html);
+}
+
+function cargarUsuarios() {
+  // Obtenemos el ID de la sucursal del input hidden
+  var suc_id = $("#SUC_IDx").val();
+
+  // Validación simple
+  if (!suc_id) {
+    console.error("No se encontró SUC_IDx");
+    return;
+  }
+
+  $.ajax({
+    url: "../../controller/usuario.php?op=listar_cards",
+    method: "POST",
+    dataType: "json",
+    data: { suc_id: suc_id },
+  })
+    .done(function (data) {
+      // Manejo robusto de la respuesta (Array vs Objeto)
+      var rows = [];
+      if (Array.isArray(data)) {
+        rows = data;
+      } else if (data && typeof data === "object") {
+        rows = Object.values(data);
+      }
+      renderUsuarios(rows);
+    })
+    .fail(function (xhr, status, err) {
+      console.error("Error AJAX:", xhr.responseText);
     });
 }
 
-function guardaryeditar(e){
-    e.preventDefault();
-    var formData = new FormData($("#mantenimiento_form")[0]);
-    formData.append('suc_id',$('#SUC_IDx').val());
-    $.ajax({
-        url:"../../controller/usuario.php?op=guardaryeditar",
-        type:"POST",
-        data:formData,
-        contentType:false,
-        processData:false,
-        success:function(data){
-            $('#table_data').DataTable().ajax.reload();
-            $('#modalmantenimiento').modal('hide');
-
-            swal.fire({
-                title:'Usuario',
-                text: 'Registro Confirmado',
-                icon: 'success'
-            });
+function eliminarUsuario(usu_id) {
+  Swal.fire({
+    title: "¿Estás seguro?",
+    text: "No podrás revertir esta acción",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, eliminar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.post(
+        "../../controller/usuario.php?op=eliminar",
+        { usu_id: usu_id },
+        function (data) {
+          cargarUsuarios(); // Recargar las cards
+          Swal.fire("¡Eliminado!", "El usuario ha sido eliminado.", "success");
         }
-    });
-}
-
-$(document).ready(function(){
-
-    $.post("../../controller/rol.php?op=combo",{suc_id:suc_id},function(data){
-        $("#rol_id").html(data);
-    });
-
-    $('#table_data').DataTable({
-        "aProcessing": true,
-        "aServerSide": true,
-        dom: 'Bfrtip',
-        buttons: [],
-        "ajax":{
-            url:"../../controller/usuario.php?op=listar",
-            type:"post",
-            data:{suc_id:suc_id}
-        },
-        "bDestroy": true,
-        "responsive": true,
-        "bInfo":true,
-        "iDisplayLength": 10,
-        "order": [[ 0, "asc" ]],
-        "language": {
-            "sProcessing":     "Procesando...",
-            "sLengthMenu":     "Mostrar _MENU_ registros",
-            "sZeroRecords":    "No se encontraron resultados",
-            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix":    "",
-            "sSearch":         "Buscar:",
-            "sUrl":            "",
-            "sInfoThousands":  ",",
-            "sLoadingRecords": "Cargando...",
-            "oPaginate": {
-                "sFirst":    "Primero",
-                "sLast":     "Último",
-                "sNext":     "Siguiente",
-                "sPrevious": "Anterior"
-            },
-            "oAria": {
-                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        },
-    });
-
-});
-
-function editar(usu_id){
-    $.post("../../controller/usuario.php?op=mostrar",{usu_id:usu_id},function(data){
-        data=JSON.parse(data);
-        $('#usu_id').val(data.USU_ID);
-        $('#usu_correo').val(data.USU_CORREO);
-        $('#usu_nom').val(data.USU_NOM);
-        $('#usu_ape').val(data.USU_APE);
-        $('#usu_dni').val(data.USU_DNI);
-        $('#usu_telf').val(data.USU_TELF);
-        $('#usu_pass').val(data.USU_PASS);
-        $('#rol_id').val(data.ROL_ID).trigger('change');
-        $('#pre_imagen').html(data.USU_IMG);
-    });
-    $('#lbltitulo').html('Editar Registro');
-    $('#modalmantenimiento').modal('show')
-}
-
-function eliminar(usu_id){
-    swal.fire({
-        title:"Eliminar!",
-        text:"Desea Eliminar el Registro?",
-        icon: "error",
-        confirmButtonText : "Si",
-        showCancelButton : true,
-        cancelButtonText: "No",
-    }).then((result)=>{
-        if (result.value){
-            $.post("../../controller/usuario.php?op=eliminar",{usu_id:usu_id},function(data){
-                console.log(data);
-            });
-
-            $('#table_data').DataTable().ajax.reload();
-
-            swal.fire({
-                title:'Usuario',
-                text: 'Registro Eliminado',
-                icon: 'success'
-            });
-        }
-    });
-}
-
-$(document).on("click","#btnnuevo",function(){
-    $('#usu_id').val('');
-    $('#usu_nom').val('');
-    $('#lbltitulo').html('Nuevo Registro');
-    $('#pre_imagen').html('<img src="../../assets/usuario/no_imagen.png" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image"></img><input type="hidden" name="hidden_usuario_imagen" value="" />');
-    $("#mantenimiento_form")[0].reset();
-    $('#modalmantenimiento').modal('show');
-});
-
-function filePreview(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#pre_imagen').html('<img src='+e.target.result+' class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image"></img>');
-        }
-        reader.readAsDataURL(input.files[0]);
+      );
     }
+  });
 }
 
-$(document).on('change','#usu_img',function(){
-    filePreview(this);
+
+$(document).ready(function () {
+  cargarUsuarios();
+});
+// formulario de nuevos registros de usuario
+// Función del botón "Nuevo Usuario"
+
+$(document).on("click", "#btnnuevo", function () {
+  window.location.href = "nuevo.php";
 });
 
-$(document).on("click","#btnremovephoto",function(){
-    $('#usu_img').val('');
-    $('#pre_imagen').html('<img src="../../assets/producto/no_imagen.png" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image"></img><input type="hidden" name="hidden_usuario_imagen" value="" />');
-});
 
-init();
+function abrirNuevoUsuario() {
+    window.location.href = "nuevo.php";
+}
+
+// Función del botón "Editar" en las cards
+function editarUsuario(usu_id) {
+    window.location.href = "nuevo.php?id=" + usu_id;
+}

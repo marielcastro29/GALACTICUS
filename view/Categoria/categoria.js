@@ -10,7 +10,9 @@ function init(){
 function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#mantenimiento_form")[0]);
+
     formData.append('suc_id',$('#SUC_IDx').val());
+    console.log('ID CATEGORIA: ',$('#SUC_IDx').val() );
     /* TODO: Guardar Informacion */
     $.ajax({
         url:"../../controller/categoria.php?op=guardaryeditar",
@@ -80,6 +82,7 @@ $(document).ready(function(){
 function editar(cat_id){
     $.post("../../controller/categoria.php?op=mostrar",{cat_id:cat_id},function(data){
         data=JSON.parse(data);
+        console.log(data);
         $('#cat_id').val(data.CAT_ID);
         $('#cat_nom').val(data.CAT_NOM);
     });

@@ -21,12 +21,12 @@
             $data=Array();
             foreach($datos as $row){
                 $sub_array = array();
-                $sub_array[] = $row["MON_NOM"];
-                $sub_array[] = $row["MON_SIMBOLO"];
-                $sub_array[] = $row["MON_COD_ISO"];
-                $sub_array[] = date("d-m-Y", strtotime($row["FECH_CREA"]))." ".date("h:i:s", strtotime($row["FECH_CREA"]));
-                $sub_array[] = '<button type="button" onClick="editar('.$row["MON_ID"].')" id="'.$row["MON_ID"].'" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-edit-2-line"></i></button>';
-                $sub_array[] = '<button type="button" onClick="eliminar('.$row["MON_ID"].')" id="'.$row["MON_ID"].'" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-delete-bin-5-line"></i></button>';
+                $sub_array[] = $row["NOMBRE"];
+                $sub_array[] = $row["SIMBOLO"];
+                $sub_array[] = $row["CODIGO_ISO"];
+                $sub_array[] = $row["FECHA_CREACION"];
+                $sub_array[] = '<button type="button" onClick="editar('.$row["ID"].')" id="'.$row["ID"].'" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-edit-2-line"></i></button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row["ID"].')" id="'.$row["ID"].'" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-delete-bin-5-line"></i></button>';
                 $data[] = $sub_array;
             }
 
@@ -43,11 +43,11 @@
             $datos=$moneda->get_moneda_x_mon_id($_POST["mon_id"]);
             if (is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row){
-                    $output["MON_ID"] = $row["MON_ID"];
-                    $output["SUC_ID"] = $row["SUC_ID"];
-                    $output["MON_NOM"] = $row["MON_NOM"];
-                    $output["MON_SIMBOLO"] = $row["MON_SIMBOLO"];
-                    $output["MON_COD_ISO"] = $row["MON_COD_ISO"];
+                    $output["MON_ID"] = $row["ID"];
+                    $output["SUC_ID"] = $row["SUCURSAL_ID"];
+                    $output["MON_NOM"] = $row["NOMBRE"];
+                    $output["MON_SIMBOLO"] = $row["SIMBOLO"];
+                    $output["MON_COD_ISO"] = $row["CODIGO_ISO"];
                     
                 }
                 echo json_encode($output);
@@ -66,7 +66,7 @@
                 $html="";
                 $html.="<option value='0' selected>Seleccionar</option>";
                 foreach($datos as $row){
-                    $html.= "<option value='".$row["MON_ID"]."'>".$row["MON_NOM"]."</option>";
+                    $html.= "<option value='".$row["ID"]."'>".$row["NOMBRE"]."</option>";
                 }
                 echo $html;
             }

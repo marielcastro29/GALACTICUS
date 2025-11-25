@@ -2,7 +2,7 @@
 require_once("../../config/conexion.php");
 require_once("../../models/Rol.php");
 $rol = new Rol();
-$datos = $rol->validar_acceso_rol($_SESSION["USU_ID"], "dashboard");
+$datos = $rol->validar_acceso_rol($_SESSION["USU_ID"], "inicio");
 if (isset($_SESSION["USU_ID"])) {
     if (is_array($datos) and count($datos) > 0) {
 
@@ -34,7 +34,7 @@ if (isset($_SESSION["USU_ID"])) {
 
         require_once("../../models/Sucursal.php");
         $sucursal = new Sucursal();
-        $nombreSucursal = $sucursal->get_sucursal_x_suc_id($_SESSION["SUC_ID"])[0]["SUC_NOM"] ;
+        $nombreSucursal = $sucursal->get_sucursal_x_suc_id($_SESSION["SUC_ID"])[0]["SUC_NOM"];
 
 ?>
 
@@ -205,59 +205,60 @@ if (isset($_SESSION["USU_ID"])) {
                             </div> <!-- end row-->
 
                             <div class="row">
-                                        <div class="col-xl-4">
-                                            <div class="card card-animate">
-                                                <div class="card-body">
-                                                    <div class="d-flex flex-column align-items-start">
-                                                        <!-- Mostrar la tabla primero -->
-                                                        <div class="w-100">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm flex-shrink-0">
-                                                                    <span class="avatar-title bg-soft-primary text-primary rounded-2 fs-2">
-                                                                        $
-                                                                    </span>
-                                                                </div>
-                                                                <div class="flex-grow-1 overflow-hidden ms-3">
-                                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
-                                                                        TOTAL VENTA
-                                                                        <br>
-                                                                        <span class="text-primary my-2">
-                                                                            <?php
-                                                                            $fechaHoy = getdate();
-                                                                            $fechaHaceInicioSemana = getdate(strtotime('-6 days'));
-
-                                                                            // Mostrar la fecha en la que inicia la semana
-                                                                            echo "DEL " . ($fechaHaceInicioSemana['mday'] . '-' . sprintf("%02d", $fechaHaceInicioSemana['mon']) . '-' . $fechaHaceInicioSemana['year']) . " AL " . ($fechaHoy['mday'] . '-' . sprintf("%02d", $fechaHoy['mon']) . '-' . $fechaHoy['year']);
-                                                                            ?>
-                                                                        </span>
-                                                                    </p>
-                                                                    <table class="table caption-top table-nowrap">
-                                                                        <tbody id="listmontoventasxmoneda">
-                                                                            <!-- Aquí se insertarán las filas de la tabla -->
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
+                                <div class="col-xl-12">
+                                    <div class="card card-animate">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column align-items-start">
+                                                <!-- Mostrar la tabla primero -->
+                                                <div class="w-100">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar-sm flex-shrink-0">
+                                                            <span class="avatar-title bg-soft-primary text-primary rounded-2 fs-2">
+                                                                $
+                                                            </span>
                                                         </div>
+                                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                                TOTAL VENTA
+                                                                <br>
+                                                                <span class="text-primary my-2">
+                                                                    <?php
+                                                                    $fechaHoy = getdate();
+                                                                    $fechaHaceInicioSemana = getdate(strtotime('-6 days'));
 
-                                                        <!-- Alineación de 'Proyección semanal' con 'TOTAL VENTA' -->
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
-
-                                                            <!-- Texto de Proyección Semanal alineado con el título TOTAL VENTA -->
-                                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 ms-5">
-                                                                Proyección semanal
+                                                                    // Mostrar la fecha en la que inicia la semana
+                                                                    echo "DEL " . ($fechaHaceInicioSemana['mday'] . '-' . sprintf("%02d", $fechaHaceInicioSemana['mon']) . '-' . $fechaHaceInicioSemana['year']) . " AL " . ($fechaHoy['mday'] . '-' . sprintf("%02d", $fechaHoy['mon']) . '-' . $fechaHoy['year']);
+                                                                    ?>
+                                                                </span>
                                                             </p>
-                                                            <!-- Botón de registrar ventas a la izquierda -->
-                                                            <a href="../Venta/" type="button" class="badge badge-soft-danger fs-12 ms-5 ms-5">
-                                                                <i class="ri-add-circle-line align-middle me-3"></i> Registrar venta
-                                                            </a>
-
+                                                            <table class="table caption-top table-nowrap">
+                                                                <tbody id="listmontoventasxmoneda">
+                                                                    <!-- Aquí se insertarán las filas de la tabla -->
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
-                                                </div><!-- end card body -->
-                                            </div><!-- end col -->
-                                        </div><!-- end col -->
-                                    </div><!-- end row -->
+                                                </div>
+
+                                                <div class="row w-100">
+                                                    <div class="col-6 d-flex align-items-center">
+                                                        <p class="text-uppercase fw-medium text-muted mb-0">
+                                                            Proyección semanal
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-6 d-flex justify-content-end">
+                                                        <a href="../Venta/" type="button" class="px-4 py-3 badge badge-soft-danger fs-12">
+                                                            <i class="ri-add-circle-line align-middle me-1"></i> Registrar venta
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div><!-- end card body -->
+                                    </div><!-- end col -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
                             <div class="row">
 
                                 <div class="col-xl-4">
@@ -267,11 +268,11 @@ if (isset($_SESSION["USU_ID"])) {
                                         </div><!-- end card header -->
 
                                         <div class="card-body">
-                                            <p class="text-muted">Top de 5 productos más vendidos en la sucursal <?php echo $nombreSucursal?> </p>
+                                            <p class="text-muted">Top de 5 productos más vendidos en la sucursal <?php echo $nombreSucursal ?> </p>
                                             <div id="contact-existing-list">
-                                                <div data-simplebar  class="mx-n3">
-                                                <ul id="listtopventaproducto" class="list list-group list-group-flush mb-0"></ul>
-                                                    
+                                                <div data-simplebar class="mx-n3">
+                                                    <ul id="listtopventaproducto" class="list list-group list-group-flush mb-0"></ul>
+
                                                     <!-- end ul list -->
                                                 </div>
                                             </div>

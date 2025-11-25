@@ -8,13 +8,23 @@
             <!-- TODO: Formulario de Mantenimiento -->
             <form method="post" id="mantenimiento_form">
                 <div class="modal-body">
-                    <input type="hidden" name="suc_id" id="suc_id"/>
+                    <input type="hidden" name="suc_id" id="suc_id" />
 
                     <div class="row gy-2">
                         <div class="col-md-12">
                             <div>
                                 <label for="valueInput" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="suc_nom" name="suc_nom" required/>
+                                <input type="text" class="form-control" id="suc_nom" name="suc_nom" required />
+
+                                <label for="valueInput" class="form-label">Correo</label>
+                                <input type="text" class="form-control" id="suc_cor" name="suc_cor" required />
+
+                                <label for="valueInput" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="suc_tel" name="suc_tel" required />
+
+                                <label for="exampleFormControlTextarea5" class="form-label">Dirección</label>
+                                <textarea class="form-control" id="suc_dir" name="suc_dir" rows="3"></textarea>
+
                             </div>
                         </div>
                     </div>
