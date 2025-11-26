@@ -8,51 +8,82 @@
             <!-- TODO: Formulario de Mantenimiento -->
             <form method="post" id="mantenimiento_form">
                 <div class="modal-body">
-                    <input type="hidden" name="prov_id" id="prov_id"/>
+                    <input type="hidden" name="prov_id" id="prov_id" />
 
-                    <div class="row gy-2">
-                        <div class="col-md-12">
-                            <div>
-                                <label for="valueInput" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="prov_nom" name="prov_nom" required/>
+                    <div class="mb-3">
+                        <label class="form-label">Tipo de Persona</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tipo_persona" id="radioNatural" value="1" checked>
+                                <label class="form-check-label" for="radioNatural">Natural</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tipo_persona" id="radioJuridica" value="2">
+                                <label class="form-check-label" for="radioJuridica">Jurídica</label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row gy-2">
-                        <div class="col-md-12">
-                            <div>
-                                <label for="valueInput" class="form-label">RUC</label>
-                                <input type="text" class="form-control" id="prov_ruc" name="prov_ruc" required/>
+                    <div id="natural_fields">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="primer_nombre" class="form-label">Primer Nombre (*)</label>
+                                <input type="text" class="form-control" id="primer_nombre" name="primer_nombre">
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="segundo_nombre" class="form-label">Segundo Nombre</label>
+                                <input type="text" class="form-control" id="segundo_nombre" name="segundo_nombre">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="primer_apellido" class="form-label">Primer Apellido (*)</label>
+                                <input type="text" class="form-control" id="primer_apellido" name="primer_apellido">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="segundo_apellido" class="form-label">Segundo Apellido</label>
+                                <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cedula" class="form-label">Cédula (*)</label>
+                            <input type="text" class="form-control" id="cedula" name="cedula">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento">
                         </div>
                     </div>
 
-                    <div class="row gy-2">
-                        <div class="col-md-12">
-                            <div>
-                                <label for="valueInput" class="form-label">Telefono</label>
-                                <input type="text" class="form-control" id="prov_telf" name="prov_telf" required/>
-                            </div>
+                    <div id="juridica_fields" style="display: none;">
+                        <div class="mb-3">
+                            <label for="razon_social" class="form-label">Razón Social (*)</label>
+                            <input type="text" class="form-control" id="razon_social" name="primer_nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ruc_juridico" class="form-label">RUC (*)</label>
+                            <input type="text" class="form-control" id="ruc_juridico" name="ruc">
                         </div>
                     </div>
 
-                    <div class="row gy-2">
-                        <div class="col-md-12">
-                            <div>
-                                <label for="valueInput" class="form-label">Direccion</label>
-                                <input type="text" class="form-control" id="prov_direcc" name="prov_direcc" required/>
+                    <div id="common_fields">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="telefono" name="telefono">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="email" class="form-control" id="correo" name="correo">
                             </div>
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección</label>
 
-                    <div class="row gy-2">
-                        <div class="col-md-12">
-                            <div>
-                                <label for="valueInput" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="prov_correo" name="prov_correo" required/>
-                            </div>
+                            <textarea class="form-control" id="direccion" name="direccion" rows="4" style="resize: none;"></textarea>
                         </div>
+                        <input type="hidden" id="suc_id" name="sucursal_id" value="1">
+
                     </div>
 
                 </div>
